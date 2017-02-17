@@ -4135,6 +4135,9 @@ public class ModelBinder {
 
 				if ( referencedEntityAttributeName == null ) {
 					referencedTableName = referencedEntityBinding.getTable().getNameIdentifier();
+					if(referencedEntityBinding.getTable().getPrimaryKey() == null) {
+						referencedEntityBinding.createPrimaryKey();
+					}
 					final Column referencedColumn = referencedEntityBinding.getTable()
 							.getPrimaryKey()
 							.getColumn( 0 );

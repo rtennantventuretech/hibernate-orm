@@ -356,11 +356,13 @@ public abstract class PersistentClass implements AttributeContainer, Serializabl
 	public void createPrimaryKey() {
 		//Primary key constraint
 		final Table table = getTable();
-		PrimaryKey pk = new PrimaryKey( table );
-		pk.setName( PK_ALIAS.toAliasString( table.getName() ) );
-		table.setPrimaryKey( pk );
+		if(table.getPrimaryKey() == null) {
+			PrimaryKey pk = new PrimaryKey(table);
+			pk.setName(PK_ALIAS.toAliasString(table.getName()));
+			table.setPrimaryKey(pk);
 
-		pk.addColumns( getKey().getColumnIterator() );
+			pk.addColumns(getKey().getColumnIterator());
+		}
 	}
 
 	public abstract String getWhere();
